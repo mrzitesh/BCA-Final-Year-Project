@@ -6,59 +6,79 @@ Q2. Admission to a professional course is subject to the following conditions:
 
 import java.util.Scanner;
 
-public class AdmissionCriteria {
+public class AdmissionEligibility {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
-        // Input marks for the subjects
-        System.out.print("Enter marks in Mathematics: ");
-        int mathMarks = scanner.nextInt();
+        System.out.print("Enter the number of students: ");
+        int n = scanner.nextInt();
+        String[] eligibleStudents = new String[n]; // Array to store eligible students
+        int count = 0; // Counter for eligible students
 
-        System.out.print("Enter marks in Physics: ");
-        int physicsMarks = scanner.nextInt();
+        for (int i = 0; i < n; i++) {
+            System.out.println("\nStudent " + (i + 1) + ":");
+            System.out.print("Enter marks in Mathematics: ");
+            int mathMarks = scanner.nextInt();
 
-        System.out.print("Enter marks in Chemistry: ");
-        int chemistryMarks = scanner.nextInt();
+            System.out.print("Enter marks in Physics: ");
+            int physicsMarks = scanner.nextInt();
 
-        // Calculate total marks
-        int totalMarks = mathMarks + physicsMarks + chemistryMarks;
+            System.out.print("Enter marks in Chemistry: ");
+            int chemistryMarks = scanner.nextInt();
 
-        // Check admission conditions
-        boolean condition1 = mathMarks >= 60;
-        boolean condition2 = physicsMarks >= 50;
-        boolean condition3 = chemistryMarks >= 40;
-        boolean condition4 = totalMarks >= 200;
-        boolean condition5 = (mathMarks + physicsMarks) >= 150;
+            // Calculate total marks
+            int totalMarks = mathMarks + physicsMarks + chemistryMarks;
 
-        // Determine admission eligibility
-        if (condition1 && condition2 && condition3 && (condition4 || condition5)) {
-            System.out.println("Admission Granted.");
+            // Check admission conditions
+            boolean condition1 = mathMarks >= 60;
+            boolean condition2 = physicsMarks >= 50;
+            boolean condition3 = chemistryMarks >= 40;
+            boolean condition4 = totalMarks >= 200;
+            boolean condition5 = (mathMarks + physicsMarks) >= 150;
+
+            // Determine admission eligibility
+            if (condition1 && condition2 && condition3 && (condition4 || condition5)) {
+                eligibleStudents[count] = "Student " + (i + 1);
+                count++;
+            }
+        }
+
+        // Output eligible candidates
+        System.out.println("\nEligible candidates:");
+        if (count == 0) {
+            System.out.println("No students are eligible.");
         } else {
-            System.out.println("Admission Denied.");
+            for (int i = 0; i < count; i++) {
+                System.out.println(eligibleStudents[i]);
+            }
         }
 
         scanner.close();
     }
-} 
+}
 
 
 
 // Output 
 /*
-Enter marks in Mathematics: 70
-Enter marks in Physics: 55
-Enter marks in Chemistry: 45
-Admission Granted.
+Enter the number of students: 3
 
-Enter marks in Mathematics: 50
+Student 1:
+Enter marks in Mathematics: 70
+Enter marks in Physics: 60
+Enter marks in Chemistry: 50
+
+Student 2:
+Enter marks in Mathematics: 55
 Enter marks in Physics: 45
 Enter marks in Chemistry: 30
-Admission Denied.
 
+Student 3:
+Enter marks in Mathematics: 65
+Enter marks in Physics: 55
+Enter marks in Chemistry: 40
 
-Enter marks in Mathematics: 80
-Enter marks in Physics: 75
-Enter marks in Chemistry: 30
-Admission Granted.
-
+Eligible candidates:
+Student 1
+Student 3
 */
